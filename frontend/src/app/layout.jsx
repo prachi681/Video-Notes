@@ -11,7 +11,8 @@ export const metadata = {
 };
 
 const theme = createTheme({
-  /** Put your mantine theme override here */
+  fontFamily: 'Open Sans, sans-serif',
+  // primaryColor: 'red',
 });
 
 export default function RootLayout({ children }) {
