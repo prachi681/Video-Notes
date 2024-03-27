@@ -1,11 +1,12 @@
-import { Container, Text, Button, Group } from '@mantine/core';
+'use client';
+import { Container, Text, Button, Group, Title, Grid } from '@mantine/core';
 // import { GithubIcon } from '@mantinex/dev-icons';
 import classes from './page.module.css';
 import { Icon3dRotate } from '@tabler/icons-react';
 
 export default function Home() {
   return (
-    <div className={classes.wrapper}>
+    <div>
       <Container size={'xl'} className={classes.inner}>
         <h1 className={classes.title}>
           A{' '}
@@ -42,6 +43,71 @@ export default function Home() {
           </Button>
         </Group>
       </Container>
+
+      <Container size={'xl'}>
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 8 }} my={'auto'}>
+            <div className={classes.body}>
+              <Title order={1}>Wait a minute...</Title>
+              <Text fw={500} fz="lg" mb={5}>
+                Subscribe to our newsletter!
+              </Text>
+              <Text fz="sm" c="dimmed">
+                You will never miss important product updates, latest news and community QA sessions. Our
+                newsletter is once a week, every Sunday.
+              </Text>
+            </div>
+
+          </Grid.Col>
+
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <img style={{ width: '100%' }} src="/feature-image.svg" />
+          </Grid.Col>
+        </Grid>
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <img style={{ width: '100%' }} src="/feature-image.svg" />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 8 }} my={'auto'}>
+            <div className={classes.body}>
+              <Title order={1}>Wait a minute...</Title>
+              <Text fw={500} fz="lg" mb={5}>
+                Subscribe to our newsletter!
+              </Text>
+              <Text fz="sm" c="dimmed">
+                You will never miss important product updates, latest news and community QA sessions. Our
+                newsletter is once a week, every Sunday.
+              </Text>
+            </div>
+
+          </Grid.Col>
+
+
+        </Grid>
+
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 8 }} my={'auto'}>
+            <div className={classes.body}>
+              <Title order={1}>Wait a minute...</Title>
+              <Text fw={500} fz="lg" mb={5}>
+                Subscribe to our newsletter!
+              </Text>
+              <Text fz="sm" c="dimmed">
+                You will never miss important product updates, latest news and community QA sessions. Our
+                newsletter is once a week, every Sunday.
+              </Text>
+            </div>
+
+          </Grid.Col>
+
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <img style={{ width: '100%' }} src="/feature-image.svg" />
+          </Grid.Col>
+        </Grid>
+      </Container>
+
+
     </div>
+
   );
 }
