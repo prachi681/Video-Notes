@@ -12,8 +12,7 @@
       padding: calc(var(--mantine-spacing-xl) * 1.5);
     }
   }
-  
-  .title {
+  .title {z
     font-family:
       Greycliff CF,
       var(--mantine-font-family);

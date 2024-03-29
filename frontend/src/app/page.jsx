@@ -3,10 +3,12 @@ import { Container, Text, Button, Group, Title, Grid } from '@mantine/core';
 // import { GithubIcon } from '@mantinex/dev-icons';
 import classes from './page.module.css';
 import { Icon3dRotate } from '@tabler/icons-react';
+import Navbar from './(main)/navbar';
 
 export default function Home() {
   return (
     <div>
+      <Navbar />
       <Container size={'xl'} className={classes.inner}>
         <h1 className={classes.title}>
           A{' '}
