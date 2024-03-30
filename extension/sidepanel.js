@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+// console.log('where ');
 const words = {
   extensions:
     'Extensions are software programs, built on web technologies (such as HTML, CSS, and JavaScript) that enable users to customize the Chrome browsing experience.',
@@ -32,6 +32,8 @@ chrome.storage.session.onChanged.addListener((changes) => {
 
   updateDefinition(lastWordChange.newValue);
 });
+
+console.log(document.querySelectorAll('video'));
 
 function updateDefinition(word) {
   // If the side panel was opened manually, rather than using the context menu,

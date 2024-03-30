@@ -20,6 +20,22 @@ function setupContextMenu() {
   });
 }
 
+function getVideoTagsInfo(tabId, callback) {
+  console.log(tabId);
+  chrome.tabs.executeScript(tabId, {
+    code: `
+      Array.from(document.getElementsByTagName('video')).map(video => ({
+        src: video.src,
+        currentTime: video.currentTime,
+        duration: video.duration,
+        paused: video.paused,
+        volume: video.volume,
+        readyState: video.readyState,
+      }))
+    `
+  }, callback);
+}
+
 chrome.runtime.onInstalled.addListener(() => {
   setupContextMenu();
 });
@@ -27,7 +43,13 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener((data, tab) => {
   // Store the last word in chrome.storage.session.
   chrome.storage.session.set({ lastWord: data.selectionText });
-
+  console.log('sjhdgjh');
   // Make sure the side panel is open.
   chrome.sidePanel.open({ tabId: tab.id });
+
+   // Get information of video tags on the current tab.
+  //  getVideoTagsInfo(tab.id, (results) => {
+  //   console.log(results); // Do something with the results.
+  // });
+
 });
