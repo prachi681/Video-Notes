@@ -15,12 +15,12 @@ export default function Home() {
           <Text component="span" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} inherit>
             fully featured
           </Text>{' '}
-          React components and hooks library
+          visual notes for videos
         </h1>
 
         <Text className={classes.description} color="dimmed">
-          Build fully functional accessible web applications with ease – Mantine includes more than
-          100 customizable components and hooks to cover you in any situation
+        Take screenshots and capture slides automatically on videos on YouTube, Udemy, Coursera & more!
+Capturing Information from videos Made Easy
         </Text>
 
         <Group className={classes.controls}>
@@ -50,35 +50,33 @@ export default function Home() {
         <Grid>
           <Grid.Col span={{ base: 12, md: 8 }} my={'auto'}>
             <div className={classes.body}>
-              <Title order={1}>Wait a minute...</Title>
+              <Title order={1}>javascripts...</Title>
               <Text fw={500} fz="lg" mb={5}>
-                Subscribe to our newsletter!
+                javascripts loops!
               </Text>
               <Text fz="sm" c="dimmed">
-                You will never miss important product updates, latest news and community QA sessions. Our
-                newsletter is once a week, every Sunday.
+                review your screenshots, notes and bookmarks for any video in web app. click on a note to play the video from the right point.
               </Text>
             </div>
 
           </Grid.Col>
 
           <Grid.Col span={{ base: 12, md: 4 }}>
-            <img style={{ width: '100%' }} src="/feature-image.svg" />
+            <img style={{ width: '100%' }} src="/img3.png" />
           </Grid.Col>
         </Grid>
         <Grid>
           <Grid.Col span={{ base: 12, md: 4 }}>
-            <img style={{ width: '100%' }} src="/feature-image.svg" />
+            <img style={{ width: '100%' }} src="/img2.png" />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 8 }} my={'auto'}>
             <div className={classes.body}>
-              <Title order={1}>Wait a minute...</Title>
+              <Title order={1}>javascripts...</Title>
               <Text fw={500} fz="lg" mb={5}>
-                Subscribe to our newsletter!
+                compact view!
               </Text>
               <Text fz="sm" c="dimmed">
-                You will never miss important product updates, latest news and community QA sessions. Our
-                newsletter is once a week, every Sunday.
+                organise your videos into notebooks and search across all notes and transcripts
               </Text>
             </div>
 
@@ -90,20 +88,19 @@ export default function Home() {
         <Grid>
           <Grid.Col span={{ base: 12, md: 8 }} my={'auto'}>
             <div className={classes.body}>
-              <Title order={1}>Wait a minute...</Title>
+              <Title order={1}>javascripts...</Title>
               <Text fw={500} fz="lg" mb={5}>
-                Subscribe to our newsletter!
+                lectures!
               </Text>
               <Text fz="sm" c="dimmed">
-                You will never miss important product updates, latest news and community QA sessions. Our
-                newsletter is once a week, every Sunday.
+                your screenshots and notes on any web video become bookmark into that video
               </Text>
             </div>
 
           </Grid.Col>
 
           <Grid.Col span={{ base: 12, md: 4 }}>
-            <img style={{ width: '100%' }} src="/feature-image.svg" />
+            <img style={{ width: '100%' }} src="/img1.png" />
           </Grid.Col>
         </Grid>
       </Container>
