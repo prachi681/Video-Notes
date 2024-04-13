@@ -4,10 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .video-notes-modal{
+            width: 400px;
+            border: 1px solid blueviolet;
+            border-radius: 5px;
+            margin: 50px;
+        }
+
+        .notes-modal-header{
+            border-bottom: 1px solid #aaa;
+            padding: 5px;
+        }
+
+        .notes-modal-header p{
+            margin: 0;
+        }
+        
+        .notes-modal-footer{
+            border-top: 1px solid #aaa;
+            padding: 5px;
+        }
+
+        .notes-modal-footer p{
+            margin: 0;
+        }
+
+        .notes-modal-body{
+            padding: 10px;
+        }
+
+    </style>
 </head>
 <body>
+    <div class="video-notes-modal">
+        <div class="notes-modal-header">
+            <p>Video Notes</p>
+        </div>
+        <div class="notes-modal-body"></div>
+        <div class="notes-modal-footer">
+            <p>Footer</p>
+        </div>
+    </div>
     <h1>skfjkld</h1>
     <video controls muted autoplay style="width: 800px; height: 600px;" src="video.mp4"></video>
+
 
 </body>
 </html>
