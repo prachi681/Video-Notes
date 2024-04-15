@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 
 const userRouter = require('./routers/userRouter');
+const noteRouter = require('./routers/noteRouter');
 
 // middleware
 app.use(cors({
@@ -14,6 +15,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/user', userRouter);
+app.use('/note', noteRouter);
 
 const port = 5000;
 

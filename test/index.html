@@ -1,55 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <style>
-        .video-notes-modal{
+        .video-notes-modal {
             width: 400px;
             border: 1px solid blueviolet;
             border-radius: 5px;
             margin: 50px;
         }
 
-        .notes-modal-header{
+        .notes-modal-header {
             border-bottom: 1px solid #aaa;
             padding: 5px;
         }
 
-        .notes-modal-header p{
+        .notes-modal-header p {
             margin: 0;
         }
-        
-        .notes-modal-footer{
+
+        .notes-modal-footer {
             border-top: 1px solid #aaa;
             padding: 5px;
         }
 
-        .notes-modal-footer p{
+        .notes-modal-footer p {
             margin: 0;
         }
 
-        .notes-modal-body{
+        .notes-modal-body {
             padding: 10px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="video-notes-modal">
         <div class="notes-modal-header">
             <p>Video Notes</p>
         </div>
-        <div class="notes-modal-body"></div>
+        <div class="notes-modal-body">
+            <button id="add-bookmark">add</button>
+        </div>
         <div class="notes-modal-footer">
             <p>Footer</p>
         </div>
     </div>
     <h1>skfjkld</h1>
-    <video controls muted autoplay style="width: 800px; height: 600px;" src="video.mp4"></video>
+    <video id="my-video" controls muted style="width: 800px; height: 600px;" src="video.mp4"></video>
+    <iframe width="914" height="514" src="https://www.youtube.com/embed/PnPc2xDwMvQ"
+        title="Is Python the Coding Language of the Future? A Brief Analysis" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+    <script>
+
+        function getYoutubeVideoId(url) {
+            // Regex to match the video ID pattern
+            const regex = /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:embed\/|v\/|watch\?v=)?([^&\s]+)/;
+
+            const match = url.match(regex);
+
+            return match && match[1];
+        }
+
+        const videoEl = document.querySelector('#my-video');
+        const bookMarkButton = document.querySelector('#add-bookmark');
+        bookMarkButton.onclick = () => {
+            console.log(videoEl.currentTime);
+        }
+
+        const addBookmark = () => {
+            fetch('http://localhost:5000/note')
+        }
+
+        const youtubeVideo = () => {
+            // const 
+            // const videoId = getYoutubeVideoId(youtubeUrl);
+        }
+
+    </script>
 
 </body>
+
 </html>
