@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { MantineProvider, createTheme } from "@mantine/core";
 import '@mantine/core/styles.css';
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       
       <body className={inter.className}>
+        <Toaster position="bottom-right" />
         <MantineProvider theme={theme} defaultColorScheme="light">
           {children}
         </MantineProvider>
