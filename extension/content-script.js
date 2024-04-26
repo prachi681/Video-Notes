@@ -1,6 +1,8 @@
 // alert('nice')
-
+console.log('content script running');
 const openBtnClasses = ['bg-blue-700', 'text-white', 'px-4', 'py-2', 'rounded']
+
+
 
 const detectVideo = () => {
   const videoElements = document.querySelectorAll('video');
@@ -19,8 +21,8 @@ const createOpenButton = () => {
   button.classList.add(...openBtnClasses);
   button.textContent = 'Open Modal';
   button.style.position = 'fixed'; // Fixed positioning for visibility across scrolling
-  button.style.top = '10px'; // Adjust top position as needed
-  button.style.right = '10px'; // Adjust right position as needed
+  button.style.top = '100px'; // Adjust top position as needed
+  button.style.left = '10px'; // Adjust right position as needed
   button.style.backgroundColor = '#007bff'; // Optional: button color
   button.style.color = '#fff'; // Optional: button text color
   button.style.cursor = 'pointer';
@@ -56,68 +58,12 @@ const createCloseButton = (modal) => {
   return button;
 }
 
-(function () {
 
-  // var tag = document.createElement('script');
 
-  // tag.src = "https://www.youtube.com/iframe_api";
-  // var firstScriptTag = document.getElementsByTagName('script')[0];
-  // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.event === 'playerReady') {
-      getVideoTagsInfo();
-    }
-  });
-
-  function getVideoTagsInfo() {
-    var video = document.getElementsByTagName('video')[0];
-    var videoInfo = {
-      src: video.src,
-      currentTime: video.currentTime,
-      duration: video.duration,
-      paused: video.paused,
-      volume: video.volume,
-      readyState: video.readyState,
-    };
-    console.log(videoInfo);
-  }
-
-  var player;
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-      height: '390',
-      width: '640',
-      videoId: 'bS9em7Bg0iU',
-      playerVars: {
-        'playsinline': 1
-      },
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  }
-
-  function onPlayerReady(event) {
-    event.target.playVideo();
-  }
-
-  // 5. The API calls this function when the player's state changes.
-  //    The function indicates that when playing a video (state=1),
-  //    the player should play for six seconds and then stop.
-  var done = false;
-  function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING && !done) {
-      setTimeout(stopVideo, 6000);
-      done = true;
-    }
-  }
-  function stopVideo() {
-    player.stopVideo();
-  }
+const initialize = () => {
 
   const videoElement = detectVideo();
+
   console.log(videoElement);
   if (videoElement) {
     videoElement.style.border = '2px solid red';
@@ -178,6 +124,18 @@ const createCloseButton = (modal) => {
 
   }
 
-})();
+}
 
 
+const myBtn = document.createElement('button');
+myBtn.innerHTML = 'Click Me'
+myBtn.style.padding = '20px'
+myBtn.style.position = 'absolute';
+myBtn.style.right = '0px';
+myBtn.style.top = '100px';
+myBtn.zIndex = '100';
+document.body.appendChild(myBtn)
+
+myBtn.onclick = () => {
+  initialize();
+}
