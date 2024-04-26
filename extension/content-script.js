@@ -2,15 +2,16 @@
 
 const openBtnClasses = ['bg-blue-700', 'text-white', 'px-4', 'py-2', 'rounded']
 
-const videoElements = document.querySelectorAll('video');
-console.log(videoElements);
-
-
-if (videoElements[0]) {
-  let ele = videoElements[0];
-  console.log("Current playback position:", ele.currentTime);
-  console.log("Video duration:", ele.duration);
-  console.log("Is video paused:", ele.paused);
+const detectVideo = () => {
+  const videoElements = document.querySelectorAll('video');
+  console.log(videoElements);
+  if (videoElements[0]) {
+    let ele = videoElements[0];
+    console.log("Current playback position:", ele.currentTime);
+    console.log("Video duration:", ele.duration);
+    console.log("Is video paused:", ele.paused);
+    return ele;
+  }
 }
 
 const createOpenButton = () => {
@@ -56,61 +57,127 @@ const createCloseButton = (modal) => {
 }
 
 (function () {
-  // Button creation
 
-  const button = createOpenButton();
+  // var tag = document.createElement('script');
 
-  // Modal creation
-  const modal = createModal();
+  // tag.src = "https://www.youtube.com/iframe_api";
+  // var firstScriptTag = document.getElementsByTagName('script')[0];
+  // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.event === 'playerReady') {
+      getVideoTagsInfo();
+    }
+  });
 
-  // Modal content (replace with your desired content)
-  const modalContent = document.createElement('div');
-  modalContent.classList.add('modal-body');
-  modalContent.textContent = 'This is the modal content.';
-  modal.appendChild(modalContent);
-
-  // add close button to modal
-  modal.appendChild(createCloseButton(modal));
-
-  // Function to toggle modal visibility
-  const toggleModal = () => {
-    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
-  };
-
-  // Button click handler to open modal
-  button.addEventListener('click', toggleModal);
-
-  // Make modal draggable
-  modal.addEventListener('mousedown', startDragging);
-
-  document.body.appendChild(button); // Append button to body
-  document.body.appendChild(modal); // Append modal to body
-
-  // Dragging functionality
-  let startX = 0;
-  let startY = 0;
-  let x = 0;
-  let y = 0;
-
-  function startDragging(e) {
-    startX = e.clientX - modal.offsetLeft;
-    startY = e.clientY - modal.offsetTop;
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', endDragging);
+  function getVideoTagsInfo() {
+    var video = document.getElementsByTagName('video')[0];
+    var videoInfo = {
+      src: video.src,
+      currentTime: video.currentTime,
+      duration: video.duration,
+      paused: video.paused,
+      volume: video.volume,
+      readyState: video.readyState,
+    };
+    console.log(videoInfo);
   }
 
-  function drag(e) {
-    x = e.clientX - startX;
-    y = e.clientY - startY;
-    modal.style.left = x + 'px';
-    modal.style.top = y + 'px';
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '390',
+      width: '640',
+      videoId: 'bS9em7Bg0iU',
+      playerVars: {
+        'playsinline': 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
   }
 
-  function endDragging() {
-    document.removeEventListener('mousemove', drag);
-    document.removeEventListener('mouseup', endDragging);
+  function onPlayerReady(event) {
+    event.target.playVideo();
   }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING && !done) {
+      setTimeout(stopVideo, 6000);
+      done = true;
+    }
+  }
+  function stopVideo() {
+    player.stopVideo();
+  }
+
+  const videoElement = detectVideo();
+  console.log(videoElement);
+  if (videoElement) {
+    videoElement.style.border = '2px solid red';
+
+    const button = createOpenButton();
+    // Modal creation
+    const modal = createModal();
+
+
+    // Modal content (replace with your desired content)
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-body');
+    modalContent.textContent = 'This is the modal content.';
+    modal.appendChild(modalContent);
+
+    // add close button to modal
+    modal.appendChild(createCloseButton(modal));
+
+    // Function to toggle modal visibility
+    const toggleModal = () => {
+      modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+    };
+
+    // Button click handler to open modal
+    button.addEventListener('click', toggleModal);
+
+    // Make modal draggable
+    modal.addEventListener('mousedown', startDragging);
+
+    document.body.appendChild(button); // Append button to body
+    document.body.appendChild(modal); // Append modal to body
+
+    // Dragging functionality
+    let startX = 0;
+    let startY = 0;
+    let x = 0;
+    let y = 0;
+
+    function startDragging(e) {
+      startX = e.clientX - modal.offsetLeft;
+      startY = e.clientY - modal.offsetTop;
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', endDragging);
+    }
+
+    function drag(e) {
+      x = e.clientX - startX;
+      y = e.clientY - startY;
+      modal.style.left = x + 'px';
+      modal.style.top = y + 'px';
+    }
+
+    function endDragging() {
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('mouseup', endDragging);
+    }
+
+
+  }
+
 })();
 
 

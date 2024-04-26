@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+chrome.runtime.onInstalled.addListener(function() {
+  console.log('Background script is running');
+});
+
 function setupContextMenu() {
   chrome.contextMenus.create({
     id: 'define-word',
@@ -53,3 +57,24 @@ chrome.contextMenus.onClicked.addListener((data, tab) => {
   // });
 
 });
+
+
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    events: {
+      'onReady': onPlayerReady,
+    }
+  });
+}
+
+function onPlayerReady(event) {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {event: 'playerReady'});
+  });
+}
+
+// var tag = document.createElement('script');
+// tag.src = "https://www.youtube.com/iframe_api";
+// var firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
