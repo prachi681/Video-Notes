@@ -2,7 +2,8 @@
 console.log('content script running');
 const openBtnClasses = ['bg-blue-700', 'text-white', 'px-4', 'py-2', 'rounded']
 
-
+// add     <script src="https://cdn.tailwindcss.com"></script> using js
+// document.head.innerHTML += `<script src="https://cdn.tailwindcss.com"></script>`
 
 const detectVideo = () => {
   const videoElements = document.querySelectorAll('video');
@@ -40,7 +41,39 @@ const createModal = () => {
   modal.style.backgroundColor = '#fff';
   modal.style.padding = '50px';
   modal.style.zIndex = '999';
+
+  // add components
+  modal.appendChild(createModelBody());
+
   return modal;
+}
+
+const createInput = (label, id) => {
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = `Enter ${label} here`;
+  input.classList.add(...['px-6', 'py-4', 'rounded', 'border', 'border-gray-300', 'w-full', 'my-4']);
+  input.id = id;
+  return input;
+}
+
+const createButton = (id) => {
+  const button = document.createElement('button');
+  button.textContent = 'Add Bookmark';
+  button.classList.add(...['bg-blue-700', 'text-white', 'px-4', 'py-2', 'rounded', 'w-full']);
+  button.style.cursor = 'pointer';
+  button.id = id;
+
+  return button;
+}
+
+const createModelBody = () => {
+  const modalBody = document.createElement('div');
+  modalBody.classList.add('modal-body');
+  modalBody.appendChild(createInput('Category', 'note-category'));
+  modalBody.appendChild(createInput('Note', 'note-description'));
+  modalBody.appendChild(createButton('add-bookmark'));
+  return modalBody;
 }
 
 const createCloseButton = (modal) => {
@@ -58,6 +91,28 @@ const createCloseButton = (modal) => {
   return button;
 }
 
+const addBookmark = (videoElement) => {
+  console.log('Adding bookmark');
+  const dataToAdd = {
+    user: '6627d42d369e7a3e1b00802a',
+    videoUrl: window.location.href,
+    type: 'youtube',
+    screenshot: '',
+    note: document.getElementById('note-description').value,
+    category: document.getElementById('note-category').value,
+    videoTime: videoElement.currentTime
+  }
+  fetch('http://localhost:5000/note/add', {
+    method: 'POST',
+    body: JSON.stringify(dataToAdd),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then((response) => {
+      console.log(response.status);
+    }).catch((err) => {
+      console.log(err);
+    });
+}
 
 
 const initialize = () => {
@@ -66,6 +121,11 @@ const initialize = () => {
 
   console.log(videoElement);
   if (videoElement) {
+
+    document.getElementById('add-bookmark').onclick = () => {
+      addBookmark(videoElement);
+    }
+
     videoElement.style.border = '2px solid red';
 
     const button = createOpenButton();

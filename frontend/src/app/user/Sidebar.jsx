@@ -48,7 +48,7 @@ const mockdata = [
   },
 ];
 
-export function Sidebar() {
+export function Sidebar({notesList}) {
   const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (

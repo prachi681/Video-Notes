@@ -1,6 +1,7 @@
-const { model, Schema } = require('../connection');
+const { model, Schema, Types } = require('../connection');
 
 const mySchema = new Schema({
+    user: { type: Types.ObjectId, ref: 'user' },
     name: { type: String, require: true },
     email: { type: String, require: true, unique: true },
     password: String,

@@ -2,7 +2,7 @@
 import { Container, Text, Title } from '@mantine/core'
 import React, { useState } from 'react'
 
-const Notes = ({ selNote }) => {
+const Notes = ({ selNote, notesList }) => {
 
     const displayNote = () => {
         return <div>
@@ -27,13 +27,13 @@ const Notes = ({ selNote }) => {
         <div>
             <Container>
 
-                {
+                {/* {
                     selNote && <>
                         {displayNote()}
                         <button onClick={seekTime}>Open</button>
                         {displayVideoFrame()}
                     </>
-                }
+                } */}
 
             </Container>
         </div>

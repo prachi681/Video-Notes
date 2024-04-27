@@ -67,34 +67,39 @@ function Login() {
   }
 
   return (
-    <Container size={420} my={40}>
-      <Title ta="center" className={classes.title}>
-        Welcome back!
-      </Title>
-      <Text c="dimmed" size="sm" ta="center" mt={5}>
-        Do not have an account yet?{' '}
-        <Anchor size="sm" component={Link} href='/signup'>
-          Create account
-        </Anchor>
-      </Text>
+    <div style={{
+      backgroundImage: `url("https://cdn.wallpapersafari.com/68/9/aznUYH.jpg")`,
+      height: '100vh',
+    }}>
+      <Container size={420} my={40}>
+        <Title ta="center" className={classes.title}>
+          Welcome back!
+        </Title>
+        <Text c="dimmed" size="sm" ta="center" mt={5}>
+          Do not have an account yet?{' '}
+          <Anchor size="sm" component={Link} href='/signup'>
+            Create account
+          </Anchor>
+        </Text>
 
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <form onSubmit={loginForm.onSubmit(formSubmit)}>
+        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+          <form onSubmit={loginForm.onSubmit(formSubmit)}>
 
-          <TextInput label="Email Address" placeholder="you@mail.com" {...loginForm.getInputProps('email')} />
-          <PasswordInput label="Password" placeholder="Your password" mt="md" {...loginForm.getInputProps('password')} />
-          <Group justify="space-between" mt="lg">
-            <Checkbox label="Remember me" />
-            <Anchor component={Link} href='/reset-password' size="sm">
-              Forgot password?
-            </Anchor>
-          </Group>
-          <Button type='submit' fullWidth mt="xl">
-            Sign in
-          </Button>
-        </form>
-      </Paper>
-    </Container>
+            <TextInput label="Email Address" placeholder="you@mail.com" {...loginForm.getInputProps('email')} />
+            <PasswordInput label="Password" placeholder="Your password" mt="md" {...loginForm.getInputProps('password')} />
+            <Group justify="space-between" mt="lg">
+              <Checkbox label="Remember me" />
+              <Anchor component={Link} href='/reset-password' size="sm">
+                Forgot password?
+              </Anchor>
+            </Group>
+            <Button type='submit' fullWidth mt="xl">
+              Sign in
+            </Button>
+          </form>
+        </Paper>
+      </Container>
+    </div>
   );
 }
 

@@ -12,6 +12,8 @@ export default function Layout({children}) {
   const [notesList, setNotesList] = useState([]);
   const [selNote, setSelNote] = useState(null);
 
+  const [uniqueCategories, setUniqueCategories] = useState([]);
+
   const fetchUserNotes = () => {
     fetch('http://localhost:5000/note/getall')
     .then((response) => {
@@ -20,6 +22,10 @@ export default function Layout({children}) {
             .then((data) => {
                 console.log(data);  
                 setNotesList(data);
+                setUniqueCategories(
+                  [...new Set(data.map(item => item.category))]
+                )
+                console.log([...new Set(data.map(item => item.category))]);
                 setSelNote(data[0]);
             })
         }
@@ -51,10 +57,10 @@ export default function Layout({children}) {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar>
-            <Sidebar/>
+            <Sidebar notesList={notesList} />
       </AppShell.Navbar>
       <AppShell.Main>
-        <Notes selNote={selNote}/>
+        <Notes selNote={selNote} notesList={notesList}/>
       </AppShell.Main>
     </AppShell>
   );
