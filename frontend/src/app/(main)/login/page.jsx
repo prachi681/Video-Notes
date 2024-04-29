@@ -68,7 +68,7 @@ function Login() {
 
   return (
     <div style={{
-      backgroundImage: `url("https://cdn.wallpapersafari.com/68/9/aznUYH.jpg")`,
+      backgroundImage: `url("https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
       height: '100vh',
     }}>
       <Container size={420} my={40}>
