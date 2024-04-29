@@ -4,6 +4,7 @@ import { Container, Text, Button, Group, Title, Grid } from '@mantine/core';
 import classes from './page.module.css';
 import { Icon3dRotate } from '@tabler/icons-react';
 import Navbar from './(main)/navbar';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -19,12 +20,14 @@ export default function Home() {
         </h1>
 
         <Text className={classes.description} color="dimmed">
-        Take screenshots and capture slides automatically on videos on YouTube, Udemy, Coursera & more!
-Capturing Information from videos Made Easy
+          Take screenshots and capture slides automatically on videos on YouTube, Udemy, Coursera & more!
+          Capturing Information from videos Made Easy
         </Text>
 
         <Group className={classes.controls}>
           <Button
+            component={Link}
+            href="/user/notes"
             size="xl"
             className={classes.control}
             variant="gradient"

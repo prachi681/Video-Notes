@@ -61,17 +61,16 @@ function Login() {
       .catch(err => {
         console.error(err);
         toast.error('Failed to create user');
-
       });
 
   }
 
   return (
     <div style={{
-      backgroundImage: `url("https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
+      backgroundImage: `url("https://wallpapers.com/images/hd/study-aesthetic-with-dim-lighting-6nwglc8vp36sj8ia.jpg")`,
       height: '100vh',
     }}>
-      <Container size={420} my={40}>
+      <Container size={420} pt={150} my={20}>
         <Title ta="center" className={classes.title}>
           Welcome back!
         </Title>

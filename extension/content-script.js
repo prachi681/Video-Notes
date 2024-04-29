@@ -30,7 +30,7 @@ const createOpenButton = () => {
   return button;
 }
 
-const createModal = () => {
+const createModal = (videoElement) => {
   const modal = document.createElement('div');
   modal.classList.add('modal');
   modal.style.display = 'none';
@@ -43,7 +43,11 @@ const createModal = () => {
   modal.style.zIndex = '999';
 
   // add components
-  modal.appendChild(createModelBody());
+  modal.appendChild(createModelBody(videoElement));
+
+  // add event listener to add bookmark button
+
+
 
   return modal;
 }
@@ -57,22 +61,27 @@ const createInput = (label, id) => {
   return input;
 }
 
-const createButton = (id) => {
+const createButton = (id, clickHandler) => {
   const button = document.createElement('button');
   button.textContent = 'Add Bookmark';
   button.classList.add(...['bg-blue-700', 'text-white', 'px-4', 'py-2', 'rounded', 'w-full']);
   button.style.cursor = 'pointer';
   button.id = id;
 
+  button.onclick = clickHandler;
+
   return button;
 }
 
-const createModelBody = () => {
+const createModelBody = (videoElement) => {
   const modalBody = document.createElement('div');
   modalBody.classList.add('modal-body');
   modalBody.appendChild(createInput('Category', 'note-category'));
   modalBody.appendChild(createInput('Note', 'note-description'));
-  modalBody.appendChild(createButton('add-bookmark'));
+  modalBody.appendChild(createButton('add-bookmark', () => {
+    console.log('Adding bookmark');
+    addBookmark(videoElement);
+  }));
   return modalBody;
 }
 
@@ -92,7 +101,6 @@ const createCloseButton = (modal) => {
 }
 
 const addBookmark = (videoElement) => {
-  console.log('Adding bookmark');
   const dataToAdd = {
     user: '6627d42d369e7a3e1b00802a',
     videoUrl: window.location.href,
@@ -122,16 +130,13 @@ const initialize = () => {
   console.log(videoElement);
   if (videoElement) {
 
-    document.getElementById('add-bookmark').onclick = () => {
-      addBookmark(videoElement);
-    }
+
 
     videoElement.style.border = '2px solid red';
 
     const button = createOpenButton();
     // Modal creation
-    const modal = createModal();
-
+    const modal = createModal(videoElement);
 
     // Modal content (replace with your desired content)
     const modalContent = document.createElement('div');

@@ -26,7 +26,7 @@ export default function Layout({children}) {
                   [...new Set(data.map(item => item.category))]
                 )
                 console.log([...new Set(data.map(item => item.category))]);
-                setSelNote(data[0]);
+                // setSelNote(data[0]);
             })
         }
     }).catch((err) => {
@@ -60,7 +60,7 @@ export default function Layout({children}) {
             <Sidebar notesList={notesList} />
       </AppShell.Navbar>
       <AppShell.Main>
-        <Notes selNote={selNote} notesList={notesList}/>
+        <Notes selNote={selNote} notesList={notesList} setSelNote={setSelNote}/>
       </AppShell.Main>
     </AppShell>
   );
