@@ -1,21 +1,19 @@
 import { useState } from 'react';
 import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, rem } from '@mantine/core';
-import { IconCalendarStats, IconChevronRight } from '@tabler/icons-react';
+import { IconCalendarStats, IconChevronRight, IconNote } from '@tabler/icons-react';
 import classes from './NavbarLinksGroup.module.css';
 
 
-export function LinksGroup({ icon: Icon, label, initiallyOpened, links }) {
-  const hasLinks = Array.isArray(links);
-  const [opened, setOpened] = useState(initiallyOpened || false);
-  const items = (hasLinks ? links : []).map((link) => (
+export function LinksGroup({ category, notes, setSelNote }) {
+  const hasLinks = Array.isArray(notes);
+  const [opened, setOpened] = useState(false);
+  const notesList = (hasLinks ? notes : []).map((note) => (
     <Text
-      component="a"
       className={classes.link}
-      href={link.link}
-      key={link.label}
-      onClick={(event) => event.preventDefault()}
+      key={note.note}
+      onClick={(event) => setSelNote(note)}
     >
-      {link.label}
+      {note.note}
     </Text>
   ));
 
@@ -25,9 +23,9 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }) {
         <Group justify="space-between" gap={0}>
           <Box style={{ display: 'flex', alignItems: 'center' }}>
             <ThemeIcon variant="light" size={30}>
-              <Icon style={{ width: rem(18), height: rem(18) }} />
+              <IconNote style={{ width: rem(18), height: rem(18) }} />
             </ThemeIcon>
-            <Box ml="md">{label}</Box>
+            <Box ml="md">{category}</Box>
           </Box>
           {hasLinks && (
             <IconChevronRight
@@ -42,7 +40,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }) {
           )}
         </Group>
       </UnstyledButton>
-      {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
+      {hasLinks ? <Collapse in={opened}>{notesList}</Collapse> : null}
     </>
   );
 }

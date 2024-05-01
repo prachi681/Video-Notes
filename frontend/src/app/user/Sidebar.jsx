@@ -1,4 +1,4 @@
-import { Group, Code, ScrollArea, rem } from '@mantine/core';
+import { Group, Code, ScrollArea, rem, Title } from '@mantine/core';
 import {
   IconNotes,
   IconCalendarStats,
@@ -48,17 +48,23 @@ const mockdata = [
   },
 ];
 
-export function Sidebar({notesList}) {
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+export function Sidebar({ notesList, setSelNote }) {
+  const links = notesList.map((category) => <LinksGroup {...category} key={category} setSelNote={setSelNote} />);
 
   return (
     <nav className={classes.navbar}>
       <div className={classes.header}>
-       
+
       </div>
 
       <ScrollArea className={classes.links}>
-        <div className={classes.linksInner}>{links}</div>
+        {notesList.length === 0 ? (
+          <Title align="center" c="dimmed" order={3} style={{ marginTop: rem(20) }}>
+            No notes yet
+          </Title>
+        ) : (
+          <div className={classes.linksInner}>{links}</div>
+        )}
       </ScrollArea>
 
       <div className={classes.footer}>
