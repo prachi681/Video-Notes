@@ -1,23 +1,25 @@
 import { UnstyledButton, Group, Avatar, Text, rem } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
 import classes from './UserButton.module.css';
+import useAppContext from '@/context/AppContext';
 
-export function UserButton() {
+export function UserButton({ currentUser }) {
+
   return (
     <UnstyledButton className={classes.user}>
       <Group>
         <Avatar
-          src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
+          src={`${process.env.NEXT_PUBLIC_API_URL}/${currentUser.avatar}`}
           radius="xl"
         />
 
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={500}>
-            Harriette Spoonlicker
+            {currentUser.name}
           </Text>
 
           <Text c="dimmed" size="xs">
-            hspoonlicker@outlook.com
+            {currentUser.email}
           </Text>
         </div>
 

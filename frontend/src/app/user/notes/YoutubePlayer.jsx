@@ -36,6 +36,7 @@ function YouTubePlayer({ note }) {
 
 
                 if (playerReady.current && player.current) {
+                    player.current.loadVideoById(getUrlParams(note.videoUrl).v);
                     player.current.seekTo(note.videoTime);
                     return;
                 }
