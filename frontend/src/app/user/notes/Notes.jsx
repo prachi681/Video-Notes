@@ -1,9 +1,11 @@
 'use client';
-import { Container, Text, Title } from '@mantine/core'
+import { Button, Container, Text, Title } from '@mantine/core'
 import React, { useState } from 'react'
 import YouTubePlayer from './YoutubePlayer';
+import toast from 'react-hot-toast';
+import { IconTrash } from '@tabler/icons-react';
 
-const Notes = ({ selNote, setSelNote, notesList }) => {
+const Notes = ({ selNote, setSelNote, notesList, fetchUserNotes }) => {
 
     const displayNote = () => {
         return <div>
@@ -21,27 +23,38 @@ const Notes = ({ selNote, setSelNote, notesList }) => {
     const seekTime = () => {
         console.log(document.getElementsByTagName('video'));
         document.querySelector('.video-stream')
-        .currentTime = selNote.videoTime;
+            .currentTime = selNote.videoTime;
+    }
+
+    const deleteNote = () => {
+        fetch(`http://localhost:5000/note/delete/${selNote._id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                console.log('Note deleted');
+                toast.success('Note deleted');
+                // setSelNote(null);
+                fetchUserNotes();
+            }
+        }
+        ).catch((err) => {
+            console.log(err);
+            toast.error('Failed to delete note');
+        });
     }
 
     return (
         <div>
-            {
-                notesList.map(note => (
-                    <div key={note._id}>
-                        <Title order={3}>{note.note}</Title>
-                        <Text>{note.time}</Text>
-                        <button onClick={() => setSelNote(note)}>Open</button>
-                    </div>
-                ))
-            }
-            <Container>
-
+            <Container size="xl">
                 {
                     selNote && <>
+                        <Button onClick={deleteNote} color='red' leftSection={
+                            <IconTrash size={16} />
+                        }>Delete</Button>
                         {displayNote()}
-                        <button onClick={seekTime}>Open</button>
-                        {/* {displayVideoFrame()} */}
                         <YouTubePlayer note={selNote} />
                     </>
                 }
