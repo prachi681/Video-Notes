@@ -61,7 +61,6 @@ export default function Layout({ children }) {
         <Group h="100%" px="md">
           <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-
         </Group>
       </AppShell.Header>
       <AppShell.Navbar>
