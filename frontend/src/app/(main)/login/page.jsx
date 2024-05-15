@@ -46,7 +46,7 @@ function Login() {
     })
       .then(response => {
         if (response.status === 200) {
-          toast.success('User created successfully');
+          toast.success('User loggedin successfully');
           response.json()
             .then((data) => {
               setCurrentUser(data);
@@ -55,7 +55,7 @@ function Login() {
               router.push('/');
             })
         } else {
-          toast.error('Failed to create user');
+          toast.error('Invalid Details');
         }
       })
       .catch(err => {

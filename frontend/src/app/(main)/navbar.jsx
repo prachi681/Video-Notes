@@ -3,33 +3,29 @@ import { useState } from 'react';
 import { Container, Group, Burger, Title, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './navbar.module.css';
+import Link from 'next/link';
 
 const links = [
-  { link: '/about', label: 'Features' },
-  { link: '/pricing', label: 'Pricing' },
-  { link: '/learn', label: 'Learn' },
-  { link: '/community', label: 'Community' },
-  { link: '/signup', label: 'Signup' },
- 
+  { link: '/user/notes', label: 'View Notes' }
 ];
 
 function Navbar() {
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[3].link);
+  const [active, setActive] = useState(links[0].link);
 
   const items = links.map((link) => (
-    <a
+    <Link
       key={link.label}
       href={link.link}
       className={classes.link}
       data-active={active === link.link || undefined}
       onClick={(event) => {
-        event.preventDefault();
+        // event.preventDefault();
         setActive(link.link);
       }}
     >
       {link.label}
-    </a>
+    </Link>
   ));
 
   return (
@@ -41,8 +37,8 @@ function Navbar() {
         </Group>
 
          <Group>
-        <Button variant="filled" color="indigo">Signup</Button>
-        <Button variant="filled" color="indigo">Login</Button>
+        <Button component={Link} href="/signup" variant="filled" color="indigo">Signup</Button>
+        <Button component={Link} href="/login" variant="filled" color="indigo">Login</Button>
         </Group>
 
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
