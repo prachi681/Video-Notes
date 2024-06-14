@@ -4,7 +4,7 @@ const mySchema = new Schema({
     videoUrl : {type : String, require:true},
     type : {type : String},
     screenshot: {type : String}, 
-    user: {type : Types.ObjectId, ref: 'user'},
+    user: {type : string .ObjectId, ref: 'user'},
     category: {type : String, default: 'Untitled Category'},
     note: String,
     videoTime: String,
